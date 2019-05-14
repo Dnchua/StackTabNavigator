@@ -1,0 +1,1 @@
+__d(function(e,s,t,i){t.exports=s(155).registerAsset({__packager_asset:!0,httpServerLocation:"/assets/img/mine",width:48,height:48,scales:[1],hash:"4d177b2de1764f5e12cc4042839d33e9",name:"icon_mine_friends",type:"png"})},411);

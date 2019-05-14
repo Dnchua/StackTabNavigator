@@ -1,0 +1,1 @@
+__d(function(e,t,s,a){s.exports=t(155).registerAsset({__packager_asset:!0,httpServerLocation:"/assets/img/mine",width:48,height:48,scales:[1],hash:"08e44b8096904291ea70e8dd130c7e35",name:"icon_mine_wallet",type:"png"})},409);

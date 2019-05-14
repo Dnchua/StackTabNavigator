@@ -1,0 +1,1 @@
+__d(function(e,a,t,s){t.exports=a(155).registerAsset({__packager_asset:!0,httpServerLocation:"/assets/img/mine",width:48,height:48,scales:[1],hash:"6ba19ded3f988d2d12aca6aee4ac88ec",name:"icon_mine_comment",type:"png"})},412);

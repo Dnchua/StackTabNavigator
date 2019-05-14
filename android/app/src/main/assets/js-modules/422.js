@@ -1,0 +1,1 @@
+__d(function(e,t,n,o){function r(e){arguments.length>1&&void 0!==arguments[1]?arguments[1]:0;return fetch("http://192.168.31.178:15515/getSearchBook?name="+e).then(function(e){var t=e.res;return console.log(t),{list:t}})}Object.defineProperty(o,"__esModule",{value:!0}),o.search=r},422);

@@ -1,0 +1,1 @@
+__d(function(e,t,s,a){s.exports=t(155).registerAsset({__packager_asset:!0,httpServerLocation:"/assets/img/mine",width:48,height:48,scales:[1],hash:"3ccb5d1cb15858e1d5ed4954feb7a4f8",name:"icon_navigation_item_message_white",type:"png"})},417);

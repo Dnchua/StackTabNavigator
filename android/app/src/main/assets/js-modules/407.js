@@ -1,0 +1,1 @@
+__d(function(e,a,t,s){t.exports=a(155).registerAsset({__packager_asset:!0,httpServerLocation:"/assets/img/mine",width:493,height:491,scales:[1],hash:"e1b27feb1a874031cfc8424b2a30fd9b",name:"avatar",type:"png"})},407);

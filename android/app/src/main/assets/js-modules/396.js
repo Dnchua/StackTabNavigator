@@ -1,0 +1,1 @@
+__d(function(e,i,t,o){Object.defineProperty(o,"__esModule",{value:!0});var n=i(12);o.default={width:n.Dimensions.get("window").width,height:n.Dimensions.get("window").height,onePixel:1/n.PixelRatio.get(),statusBarHeight:"ios"===n.Platform.OS?20:0}},396);

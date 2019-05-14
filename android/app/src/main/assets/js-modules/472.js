@@ -1,0 +1,1 @@
+__d(function(e,s,a,t){a.exports=s(155).registerAsset({__packager_asset:!0,httpServerLocation:"/assets/images",width:90,height:90,scales:[1],hash:"91d9386c8963b50d6a2c4ffff794a13b",name:"ic_shop_car",type:"png"})},472);

@@ -1,0 +1,1 @@
+__d(function(r,t,o,s){"use strict";function e(r){var t=Error.call(this,r.title);this.name="AuthError",this.message=t.message,this.stack=t.stack,babelHelpers.extends(this,r)}e.__proto__=Error,e.prototype.__proto__=Error.prototype,s.AuthError=e},444);

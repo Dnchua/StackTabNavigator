@@ -1,0 +1,1 @@
+__d(function(e,s,t,a){t.exports=s(155).registerAsset({__packager_asset:!0,httpServerLocation:"/assets/img/mine",width:48,height:48,scales:[1],hash:"f03bd6ae4fc67e40bbdf666c819f753d",name:"icon_mine_balance",type:"png"})},410);

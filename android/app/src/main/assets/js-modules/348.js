@@ -1,0 +1,1 @@
+__d(function(e,t,n,r){Object.defineProperty(r,"__esModule",{value:!0});var u=t(307),a=babelHelpers.interopRequireDefault(u);r.default=function(){return(0,a.default)(!1,"`getScreenConfig` has been replaced with `getScreenOptions`")}},348);

@@ -1,0 +1,1 @@
+__d(function(r,e,n,o){Object.defineProperty(o,"__esModule",{value:!0}),o.supportsImprovedSpringAnimation=void 0;var t=e(12),i=t.NativeModules.PlatformConstants;o.supportsImprovedSpringAnimation=function(){if(i&&i.reactNativeVersion){var r=i.reactNativeVersion,e=r.major,n=r.minor;return n>=50||0===e&&0===n}return!1}},337);

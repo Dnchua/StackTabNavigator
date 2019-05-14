@@ -1,0 +1,1 @@
+__d(function(e,t,a,s){a.exports=t(155).registerAsset({__packager_asset:!0,httpServerLocation:"/assets/img/mine",width:32,height:32,scales:[1],hash:"9322dae2d1226f8d2adfc5294929405a",name:"beauty_technician_v15",type:"png"})},408);

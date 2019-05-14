@@ -1,0 +1,1 @@
+__d(function(e,s,t,a){t.exports=s(155).registerAsset({__packager_asset:!0,httpServerLocation:"/assets/src/img",width:27,height:27,scales:[1],hash:"75726f3d484adaf9b68f0bfeae014777",name:"star",type:"png"})},467);

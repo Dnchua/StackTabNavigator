@@ -1,0 +1,1 @@
+__d(function(e,t,r,n){"use strict";var c,i={get useFiber(){return null==c&&(c=!0),c},set useFiber(e){if(null!=c)throw new Error("Cannot set useFiber feature flag after it has been accessed. Please override it before requiring React.");c=e}};r.exports=i},40);

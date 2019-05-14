@@ -1,0 +1,1 @@
+__d(function(e,s,t,a){t.exports=s(155).registerAsset({__packager_asset:!0,httpServerLocation:"/assets/img/mine",width:48,height:48,scales:[1],hash:"cfaff81dc37bc14a24af66b8ec83f476",name:"icon_mine_customerService",type:"png"})},414);

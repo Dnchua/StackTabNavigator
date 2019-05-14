@@ -1,0 +1,1 @@
+__d(function(e,t,s,a){s.exports=t(155).registerAsset({__packager_asset:!0,httpServerLocation:"/assets/img/mine",width:48,height:48,scales:[1],hash:"5ed388746eca79c86d077fc644e73c63",name:"icon_mine_aboutmeituan",type:"png"})},415);

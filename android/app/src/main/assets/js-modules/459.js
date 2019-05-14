@@ -1,0 +1,1 @@
+__d(function(t,i,a,h){"use strict";a.exports=function(t,i,a){this.tagname=t,this.parent=i,this.child={},this.attrsMap={},this.val=a,this.addChild=function(t){Array.isArray(this.child[t.tagname])?this.child[t.tagname].push(t):this.child[t.tagname]=[t]}}},459);

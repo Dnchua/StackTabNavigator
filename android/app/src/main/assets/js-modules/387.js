@@ -1,0 +1,1 @@
+__d(function(e,s,t,a){t.exports=s(155).registerAsset({__packager_asset:!0,httpServerLocation:"/assets/src/img",width:200,height:262,scales:[1],hash:"f9bdfd44042e3eb1e2a9202f2b579df6",name:"default-cover",type:"png"})},387);
