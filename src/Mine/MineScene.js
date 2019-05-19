@@ -83,9 +83,17 @@ class MineScene extends Component {
   }
 
   changePsw = () => {
-    
+    this.props.navigate('ChangePsw')
   }
 
+  gotoTeacher = () => {
+    this.props.navigate('AdminCenter')
+  }
+
+  gotoInfoCenter = () => {
+    this.props.navigate('InfoCenter')
+  }
+  
   renderCells() {
     let cells = []
     let dataList = this.getDataList()
@@ -106,6 +114,8 @@ class MineScene extends Component {
     )
   }
 
+
+  
   renderHeader() {
     const {id} = this.state;
     return (
@@ -116,7 +126,9 @@ class MineScene extends Component {
             <Heading2 style={{ color: 'white' }}>{id}</Heading2>
             <Image style={{ marginLeft: 4 }} source={require('../../img/mine/beauty_technician_v15.png')} />
           </View>
-          <Paragraph style={{ color: 'white', marginTop: 4 }}>个人信息 ></Paragraph>
+          <TouchableOpacity onPress={this.gotoInfoCenter}>
+            <Paragraph style={{ color: 'white', marginTop: 4 }}>个人信息 ></Paragraph>
+          </TouchableOpacity>
         </View>
       </View>
     )
@@ -143,6 +155,9 @@ class MineScene extends Component {
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.button} activeOpacity={0.5} onPress={this.changePsw}>
                     <Text style={{color: 'white'}}>修改密码</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.button} activeOpacity={0.5} onPress={this.gotoTeacher}>
+                    <Text style={{color: 'white'}}>管理员功能</Text>
                 </TouchableOpacity>
             </View>
         </ScrollView>
@@ -177,7 +192,7 @@ class MineScene extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: 'space-around',
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
 },

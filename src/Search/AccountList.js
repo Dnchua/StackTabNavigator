@@ -10,15 +10,14 @@ import {
 } from 'react-native';
 import { px2dp, SCREEN_WIDTH } from '../utils';
 import {api} from '../data/api';
+import {accountMock} from '../mock/AcoountMock';
 var dimensions = require("Dimensions");
 //获取屏幕的宽度
 var { width } = dimensions.get("window");
+const borrow_yes = require('../img/color/borrow_yes.png');
+const borrow_no = require('../img/color/borrow_no.png');
+export default class AccountList extends Component {
 
-export default class BookList extends Component {
-
-    // static defaultProps = {
-    //     url: api.getSearchBook
-    // };
 
     constructor(props) {
         super(props);
@@ -30,23 +29,27 @@ export default class BookList extends Component {
 
     //渲染完成，请求网络数据
     componentDidMount() {
-        fetch(api.getSearchBook+this.props.search)
-            .then((response) => response.json())
-            .then((response) => {
-                //解析json数据
-                var json = response['res'];
-                console.log(json);
-                //更新状态机
-                this.setState({
-                    data: this.state.data.cloneWithRows(json),
-                });
-            })
-            .catch((error) => {
-                if (error) {
-                    //网络错误处理
-                    console.log('error', error);
-                }
-            })
+        var json = accountMock.list;
+        this.setState({
+            data: this.state.data.cloneWithRows(json)
+        })
+        // fetch(api.getSearchBook+this.props.search)
+        //     .then((response) => response.json())
+        //     .then((response) => {
+        //         //解析json数据
+        //         var json = response['res'];
+        //         console.log(json);
+        //         //更新状态机
+        //         this.setState({
+        //             data: this.state.data.cloneWithRows(json),
+        //         });
+        //     })
+        //     .catch((error) => {
+        //         if (error) {
+        //             //网络错误处理
+        //             console.log('error', error);
+        //         }
+        //     })
     }
 
     render() {
@@ -68,20 +71,16 @@ export default class BookList extends Component {
     getView= (rowData) => {
         //这里返回的就是每个Item
         return (
-            <TouchableOpacity activeOpacity={0.5}
-            onPress = { () => {
-                this.props.navigate('BookDetails',{rowData:rowData});
-            }}
-                              >
+            <TouchableOpacity activeOpacity={0.5}>
                 <View style={styles.row}>
                     {/*左边的图片*/}
-                    <Image source={{uri: rowData.imageName}} style={styles.image}/>
+                    <Image source={rowData.hasBeenBorrow === 'yes' ? borrow_yes:borrow_no} style={styles.image}/>
                     <View style={styles.left}>
                         {/*右边的View*/}
-                        <Text numberOfLines={1} style={{marginTop: 15, color: '#333333'}}>{rowData.Book_name}</Text>
-                        <Text numberOfLines={1} style={{marginTop: 15, color: '#333333'}}>{rowData.Writer}</Text>
+                        <Text numberOfLines={1} style={{marginTop: 15, color: '#333333'}}>分馆：{rowData.libPositon}</Text>
+                        <Text numberOfLines={1} style={{marginTop: 15, color: '#333333'}}>馆藏地：{rowData.libPositon}</Text>
                         <View style={styles.content}>
-                            <Text  numberOfLines={1} style={{flex: 1, textAlign: 'left'}}>{rowData.Pub_company}</Text>
+                            <Text  numberOfLines={1} style={{flex: 1, textAlign: 'left'}}>藏馆号：{rowData.book_num}</Text>
                         </View>
                     </View>
                 </View>

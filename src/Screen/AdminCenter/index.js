@@ -8,8 +8,7 @@ import {
     ToastAndroid,
     DeviceEventEmitter 
 } from 'react-native';
-import MineScene from './MineScene';
-export default class Mine extends Component {
+export default class AdminCenter extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -17,18 +16,18 @@ export default class Mine extends Component {
         };
     }
     componentDidMount () {
-        let _that=this;
-        AsyncStorage.getItem("id",function (err,result){
-            if(err){
-                alert(err)
-                return;
-            }
-                if(result !== null){
-                 _that.setState({isLogin:true});   
-                }
-        });
-        this.changeLogin = DeviceEventEmitter.addListener('logout',this.logout);
-        this.loginSucess = DeviceEventEmitter.addListener('login',this.login);
+        // let _that=this;
+        // AsyncStorage.getItem("id",function (err,result){
+        //     if(err){
+        //         alert(err)
+        //         return;
+        //     }
+        //         if(result !== null){
+        //          _that.setState({isLogin:true});   
+        //         }
+        // });
+        // this.changeLogin = DeviceEventEmitter.addListener('logout',this.logout);
+        // this.loginSucess = DeviceEventEmitter.addListener('login',this.login);
     }
 
     logout = (mes) => {
@@ -43,35 +42,28 @@ export default class Mine extends Component {
         });
     }
 
-    componentWillUnmount() {
-        // 移除监听
-        if (this.changeLogin) { this.changeLogin.remove(); }
-        if (this.loginSucess) { this.loginSucess.remove(); }
-      }
+    // componentWillUnmount() {
+    //     // 移除监听
+    //     if (this.changeLogin) { this.changeLogin.remove(); }
+    //     if (this.loginSucess) { this.loginSucess.remove(); }
+    //   }
     render() {
-        const {isLogin} = this.state;
         return (
             <View style={styles.container}>
-                {isLogin ?   
-                <MineScene navigate = {this.props.navigation.navigate}/>              
-                :
-                <View>
                     <TouchableOpacity style={styles.button} activeOpacity={0.5} onPress={
                         () => {
-                            this.props.navigation.navigate('Login');
+                            this.props.navigation.navigate('InsertBook');
                         }
                     }>
-                        <Text style={{color: 'white'}}>学生登陆</Text>
+                        <Text style={{color: 'white'}}>图书录入</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.button} activeOpacity={0.5} onPress={
                         () => {
                             this.props.navigation.navigate('TeacherLogin');
                         }
                     }>
-                        <Text style={{color: 'white'}}>教师登陆</Text>
+                        <Text style={{color: 'white'}}>图书信息修改</Text>
                     </TouchableOpacity>                    
-                </View>
-                }
             </View>
         );
     }

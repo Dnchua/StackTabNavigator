@@ -1,6 +1,12 @@
 /**
  * Sample React Native App
  * https://github.com/facebook/react-native
+ * TO LIST:
+ *      1 管理员的功能和界面  完成管理员登陆功能20min,管理员界面有图
+ *      2 个人信息编辑  完成个人信息编辑
+ *      3 用户的注册    完成用户注册功能40min
+ *      4 图书库存和分类的显示    bug:只能搜索一次/修改思路传递搜索结果给渲染列表
+ *      5 修改密码，找回密码，书评和评分  完成修改密码和找回密码页面
  * @flow
  */
 
@@ -14,7 +20,6 @@ import {
 } from 'react-navigation';
 
 import Home from './src/Home/index';
-import Talk from './src/Talk';
 import Record from './src/Record/Record';
 import Mine from './src/Mine/Mine';
 import Details from './src/Details';
@@ -23,6 +28,13 @@ import BookDetails from './src/Search/bookDetails';
 import Search from './src/Search';
 import BookDe from './src/Screen/BookDetail/index';
 import OnlineReader from './src/Screen/OnlineReader';
+import TeacherLogin from './src/Screen/TeacherLogin/index';
+import Signup from './src/Screen/Signup/index';
+import AdminCenter from './src/Screen/AdminCenter/index';
+import InsertBook from './src/Screen/AdminCenter/InsertBook';
+import InfoCenter from './src/Screen/InfoCenter/index';
+import ForgotPassword from './src/Screen/InfoCenter/ForgotPassword';
+import ChangePsw from './src/Screen/InfoCenter/ChangePsw';
 String.prototype.replaceAll = function(search, replacement) {
     var target = this;
     return target.replace(new RegExp(search, 'g'), replacement);
@@ -187,5 +199,26 @@ export default Navi = StackNavigator({
     },
     appOnlineReader: {
         screen: OnlineReader
+    },
+    TeacherLogin : {
+        screen: TeacherLogin
+    },
+    Signup : {
+        screen: Signup
+    },
+    AdminCenter: {
+        screen:AdminCenter
+    },
+    InsertBook: {
+        screen:InsertBook
+    },
+    InfoCenter :{
+        screen:InfoCenter
+    },
+    ForgotPassword :{
+        screen:ForgotPassword
+    },
+    ChangePsw :{
+        screen:ChangePsw
     }
 });

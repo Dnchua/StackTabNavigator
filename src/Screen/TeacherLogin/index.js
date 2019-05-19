@@ -16,13 +16,11 @@ import {
   AsyncStorage,
   DeviceEventEmitter
 } from "react-native";
-
+import {api} from '../../data/api';
 var dimensions = require("Dimensions");
-import {api} from '../data/api';
-
 //获取屏幕的宽度
 var { width } = dimensions.get("window");
-export default class Login extends Component {
+export default class TeacherLogin extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -41,7 +39,8 @@ export default class Login extends Component {
 
   login = () => {
     const {id,psw} = this.state;
-    const url=api.login;
+    const url= api.teacherLogin;
+    
     postData = {
       id:id,
       password:psw
@@ -59,8 +58,8 @@ export default class Login extends Component {
       const state = response['state'];
       if(state === 1) {
         ToastAndroid.show('登陆成功,三秒后跳转到个人界面', ToastAndroid.SHORT);
-        AsyncStorage.setItem("id", this.state.id);
-        DeviceEventEmitter.emit('login',this.state.id);
+        AsyncStorage.setItem("teacherId", this.state.id);
+        DeviceEventEmitter.emit('teacherLogin',this.state.id);
         setTimeout(() => {this.props.navigation.goBack();},3000);
       }
       if(state === 3) {
@@ -102,14 +101,6 @@ export default class Login extends Component {
     // headerLeft: (<View/>),
   });
 
-  gotoSignup = () => {
-    this.props.navigation.navigate('Signup')
-  }
-
-  gotoForgot = () => {
-    this.props.navigation.navigate('ForgotPassword')
-  }
-  
   render() {
     return (
       <View style={styles.container}>
@@ -130,16 +121,12 @@ export default class Login extends Component {
         />
         {/*登录*/}
         <TouchableOpacity style={styles.btnStyle} onPress={this.login}>
-          <Text style={styles.loginText}>登录</Text>
+          <Text style={styles.loginText}>教师登录</Text>
         </TouchableOpacity>
         {/*无法登录  新用户*/}
         <View style={styles.canNot}>
-          <TouchableOpacity onPress={this.gotoForgot}>
-            <Text style={{ color: "#4398ff" }}>忘记密码</Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={this.gotoSignup}>
-            <Text style={{ color: "#4398ff" }}>新用户</Text>
-          </TouchableOpacity>
+          <Text style={{ color: "#4398ff" }}>无法登录</Text>
+          <Text style={{ color: "#4398ff" }}>新用户</Text>
         </View>
       </View>
     );
@@ -163,7 +150,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#4398ff"
   },
   headerStyle: {
-    backgroundColor: "#3F51B5"
+    backgroundColor: "#EB3695"
   },
   headerTitleStyle: {
     color: "white",

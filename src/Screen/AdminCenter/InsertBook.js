@@ -16,18 +16,18 @@ import {
   AsyncStorage,
   DeviceEventEmitter
 } from "react-native";
-
+import {api} from '../../data/api';
 var dimensions = require("Dimensions");
-import {api} from '../data/api';
-
 //获取屏幕的宽度
 var { width } = dimensions.get("window");
-export default class Login extends Component {
+export default class InsertBook extends Component {
   constructor(props) {
     super(props);
     this.state = {
       id: "",
-      psw: ""
+      psw: "",
+      repeatPsw: "",
+      passport:""
     };
   }
 
@@ -39,44 +39,58 @@ export default class Login extends Component {
     this.setState({psw});
   }
 
-  login = () => {
-    const {id,psw} = this.state;
-    const url=api.login;
-    postData = {
-      id:id,
-      password:psw
-    };
-    let myHeaders = new Headers();
-    myHeaders.append('Content-Type', 'application/json');
-    var opts = {
-      method: "POST", //请求方法
-      body: JSON.stringify(postData), //请求体
-      headers: myHeaders
-    };
-    fetch(url,opts)
-    .then((response) => response.json())
-    .then((response) => {
-      const state = response['state'];
-      if(state === 1) {
-        ToastAndroid.show('登陆成功,三秒后跳转到个人界面', ToastAndroid.SHORT);
-        AsyncStorage.setItem("id", this.state.id);
-        DeviceEventEmitter.emit('login',this.state.id);
-        setTimeout(() => {this.props.navigation.goBack();},3000);
-      }
-      if(state === 3) {
-        ToastAndroid.show('请检查账号密码是否有误', ToastAndroid.SHORT);
-      }
-    })
-    .catch((error) => {
-        if (error) {
-            //网络错误处理
-            console.log('error', error);
-            ToastAndroid.show('网络错误', ToastAndroid.SHORT);
-        }
-    })
+  onchangeRepeat = (repeatPsw) => {
+    this.setState({repeatPsw});
+  }
+
+  onchangePassport = (passport) => {
+    const newText = passport.replace(/[^0-9]/g, '');
+    this.setState({passport:newText});
+  }
+
+  signup = () => {
+    ToastAndroid.show('录入书籍数据成功', ToastAndroid.SHORT);
+    return;
+    // const {id,psw,passport,repeatPsw} = this.state;
+    // if (psw !== repeatPsw) {
+    //     ToastAndroid.show('两次输入的密码不正确', ToastAndroid.SHORT);
+    //     return;
+    // }
+    // const url=api.studentSignup;
+    // postData = {
+    //   id:id,
+    //   password:psw,
+    //   passport:passport
+    // };
+    // let myHeaders = new Headers();
+    // myHeaders.append('Content-Type', 'application/json');
+    // var opts = {
+    //   method: "POST", //请求方法
+    //   body: JSON.stringify(postData), //请求体
+    //   headers: myHeaders
+    // };
+    // fetch(url,opts)
+    // .then((response) => response.json())
+    // .then((response) => {
+    //   const state = response['state'];
+    //   if(state === 1) {
+    //     ToastAndroid.show('注册成功,三秒后跳转到登陆界面', ToastAndroid.SHORT);
+    //     setTimeout(() => {this.props.navigation.goBack();},3000);
+    //   }
+    //   if(state === 3) {
+    //     ToastAndroid.show('用户已经被注册', ToastAndroid.SHORT);
+    //   }
+    // })
+    // .catch((error) => {
+    //     if (error) {
+    //         //网络错误处理
+    //         console.log('error', error);
+    //         ToastAndroid.show('网络错误', ToastAndroid.SHORT);
+    //     }
+    // })
   }
   static navigationOptions = ({ navigation, screenProps }) => ({
-    headerTitle: "登陆/注册",
+    headerTitle: "注册",
     //设置滑动返回的距离
     gestureResponseDistance: { horizontal: 300 },
 
@@ -102,20 +116,12 @@ export default class Login extends Component {
     // headerLeft: (<View/>),
   });
 
-  gotoSignup = () => {
-    this.props.navigation.navigate('Signup')
-  }
-
-  gotoForgot = () => {
-    this.props.navigation.navigate('ForgotPassword')
-  }
-  
   render() {
     return (
       <View style={styles.container}>
         <TextInput
           style={styles.textInput}
-          placeholder={"请输入用户名"}
+          placeholder={"请输入书籍名称"}
           //输入框下划线
           underlineColorAndroid={"transparent"}
           onChangeText={this.onchangeName}
@@ -123,24 +129,42 @@ export default class Login extends Component {
         {/*密码*/}
         <TextInput
           style={styles.textInput}
-          placeholder={"请输入密码"}
+          placeholder={"请输入作者"}
           secureTextEntry={true}
           underlineColorAndroid={"transparent"}
           onChangeText={this.onchangePsw}
         />
-        {/*登录*/}
-        <TouchableOpacity style={styles.btnStyle} onPress={this.login}>
-          <Text style={styles.loginText}>登录</Text>
+        {/*重复密码*/}
+        <TextInput
+          style={styles.textInput}
+          placeholder={"请输入价格"}
+          secureTextEntry={true}
+          underlineColorAndroid={"transparent"}
+          onChangeText={this.onchangeRepeat}
+        />
+        {/*身份证后六位*/}
+        <TextInput
+          style={styles.textInput}
+          placeholder={"请输入出版社名称"}
+          underlineColorAndroid={"transparent"}
+          onChangeText={this.onchangePassport}
+          keyboardType={'numeric'}
+          maxLength={6}
+        />
+        {/*身份证后六位*/}
+        <TextInput
+          style={styles.textInput}
+          placeholder={"请输入书籍采购总量"}
+          underlineColorAndroid={"transparent"}
+          onChangeText={this.onchangePassport}
+          keyboardType={'numeric'}
+          maxLength={6}
+        />
+        {/*注册*/}
+        <TouchableOpacity style={styles.btnStyle} onPress={this.signup}>
+          <Text style={styles.loginText}>录入图书</Text>
         </TouchableOpacity>
         {/*无法登录  新用户*/}
-        <View style={styles.canNot}>
-          <TouchableOpacity onPress={this.gotoForgot}>
-            <Text style={{ color: "#4398ff" }}>忘记密码</Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={this.gotoSignup}>
-            <Text style={{ color: "#4398ff" }}>新用户</Text>
-          </TouchableOpacity>
-        </View>
       </View>
     );
   }
@@ -150,6 +174,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: "column",
+    justifyContent:'space-around',
     //设置次轴的对齐方式
     alignItems: "center",
     backgroundColor: "#F5FCFF"

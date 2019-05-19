@@ -6,7 +6,7 @@ import {
     StyleSheet,
     TouchableOpacity,
 } from 'react-native';
-
+import AccountList from './AccountList';
 
 export default class BookDetails extends Component {
     constructor(props) {
@@ -37,6 +37,10 @@ export default class BookDetails extends Component {
                         <Text>书评</Text>
                     </TouchableOpacity>
                 </View>
+                <Text style={{marginTop: 15, marginBottom: 15,color: '#333333'}}>馆藏信息</Text>
+                <View style={styles.accountList}>
+                    <AccountList />
+                </View>
             </View>
         );
     }
@@ -47,9 +51,13 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#F5FCFF',
     },
+    accountList: {
+        flex: 1,
+        justifyContent: 'space-around',
+        alignItems:'center'
+    },
     introduction: {
         marginTop: 15,
-        marginLeft: 10,
         flexDirection: 'row',
         justifyContent: 'flex-start',
         backgroundColor: 'white'
@@ -57,7 +65,6 @@ const styles = StyleSheet.create({
     bookRank: {
         height:25,
         marginTop: 30,
-        marginLeft: 10,
         flexDirection: 'row',
         justifyContent: 'flex-start',
         backgroundColor: 'white'
@@ -69,9 +76,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         justifyContent: 'center',
         alignItems: 'center',
-        marginTop: 8,
-        marginLeft: 10,
-        marginRight: 10,
+        marginTop: 8
     },
     image: {
         width: 90,
