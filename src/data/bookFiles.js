@@ -58,7 +58,6 @@ function executeDownloadFlow(DIR, book) {
       return downloadRes;
     })
     .catch(err => {
-      console.warn(err.message);
     });
 }
 

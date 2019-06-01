@@ -14,21 +14,24 @@ export default class Mine extends Component {
         super(props);
         this.state = {
           isLogin:false,
+          id:'',
+          whoLogin:''
         };
     }
     componentDidMount () {
         let _that=this;
-        AsyncStorage.getItem("id",function (err,result){
-            if(err){
-                alert(err)
-                return;
-            }
-                if(result !== null){
-                 _that.setState({isLogin:true});   
-                }
-        });
+        // AsyncStorage.getItem("id",function (err,result){
+        //     if(err){
+        //         alert(err)
+        //         return;
+        //     }
+        //         if(result !== null){
+        //          _that.setState({isLogin:true,sid:result});   
+        //         }
+        // });
         this.changeLogin = DeviceEventEmitter.addListener('logout',this.logout);
         this.loginSucess = DeviceEventEmitter.addListener('login',this.login);
+        this.TloginSucess = DeviceEventEmitter.addListener('teacherLogin',this.tLogin);
     }
 
     logout = (mes) => {
@@ -37,9 +40,19 @@ export default class Mine extends Component {
         });
     }
 
-    login = (mes) => {
+    tLogin = (msg) => {
         this.setState({
-            isLogin:true
+            isLogin:true,
+            whoLogin:'teacher',
+            id:msg
+        });
+    }
+
+    login = (msg) => {
+        this.setState({
+            isLogin:true,
+            whoLogin:'student',
+            id:msg
         });
     }
 
@@ -49,11 +62,12 @@ export default class Mine extends Component {
         if (this.loginSucess) { this.loginSucess.remove(); }
       }
     render() {
-        const {isLogin} = this.state;
+        const {isLogin,whoLogin} = this.state;
+
         return (
             <View style={styles.container}>
                 {isLogin ?   
-                <MineScene navigate = {this.props.navigation.navigate}/>              
+                <MineScene navigate = {this.props.navigation.navigate} id={this.state.id} whoLogin={whoLogin}/>              
                 :
                 <View>
                     <TouchableOpacity style={styles.button} activeOpacity={0.5} onPress={

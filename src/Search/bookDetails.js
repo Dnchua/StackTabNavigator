@@ -12,7 +12,9 @@ export default class BookDetails extends Component {
     constructor(props) {
         super(props);
     }   
-
+    gotoStarRating = () => {
+        this.props.navigation.navigate('BookRating');
+    }
     render() {
         const rowData = this.props.navigation.state.params.rowData;
         return (
@@ -33,11 +35,11 @@ export default class BookDetails extends Component {
                     <Text>{rowData.Brief}</Text>
                 </View>
                 <View style={styles.bookRank}>
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={this.gotoStarRating}>
                         <Text>书评</Text>
                     </TouchableOpacity>
                 </View>
-                <Text style={{marginTop: 15, marginBottom: 15,color: '#333333'}}>馆藏信息</Text>
+                <Text style={{marginTop: 15, marginBottom: 15,color: '#333333'}}>馆藏信息 ({rowData.Current_num}/{rowData.Total_num})</Text>
                 <View style={styles.accountList}>
                     <AccountList />
                 </View>

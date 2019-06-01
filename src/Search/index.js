@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image, TextInput, TouchableHighlight } from 'react-native';
+import { View, Text, StyleSheet, Image, TextInput, TouchableHighlight ,ListView} from 'react-native';
 
 // import Camera from 'react-native-camera';
 
@@ -9,7 +9,7 @@ import { px2dp, SCREEN_WIDTH } from '../utils';
 import Feeds from '../components/Feeds';
 import BookList from './bookList';
 import ResultItem from './ResultItem';
-
+import {api} from '../data/api';
 const ITEM_HEIGHT = px2dp(250);
 
 export default class Search extends React.PureComponent {
@@ -29,7 +29,9 @@ export default class Search extends React.PureComponent {
     super(props);
 
     this.state = {
-      mode: 'init',
+      mode: 'show',
+      searchBook:[],
+      data: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}),
     };
 
     this.q = '';
@@ -41,15 +43,17 @@ export default class Search extends React.PureComponent {
     }
 
     this.q = e.nativeEvent.text.trim();
-
-    if (this.state.mode === 'show') {
-      // 已经显示结果了，直接刷新下Feeds
-      this.feeds && this.feeds.refresh();
-    } else {
-      this.setState({
-        mode: 'show',
-      });
-    }
+    this._renderSearchResult();
+    // if (this.state.mode === 'show') {
+    //   // 已经显示结果了，直接刷新下Feeds
+    //   this.feeds && this.feeds.refresh();
+    // } else {
+    //   this.setState({
+    //     mode: 'show',
+    //   },() => {
+    //     this._renderSearchResult();
+    //   });
+    // }
   };
 
   _gotoDetail = (id, title) => {
@@ -77,26 +81,27 @@ export default class Search extends React.PureComponent {
   };
 
   _doScan = () => {
-    this.props.navigator.push({
-      screen: 'app.Camera', // unique ID registered with Navigation.registerScreen
-      title: 'QR',
-    });
+    this.props.navigation.navigate('Recommand')
   };
 
-  _renderSearchResult = () => {
-    return (
-      <View style={styles.listWrap}>
-        <BookList search={this.q} navigate = {this.props.navigation.navigate}/>
-      </View>
-      // <Feeds
-      //   ref={view => (this.feeds = view)}
-      //   navigator={this.props.navigator}
-      //   renderItem={this._renderItem}
-      //   fetchData={page => search(this.q, page)}
-      //   keyExtractor={item => item.Book_num}
-      //   getItemLayout={this._getItemLayout}
-      // />
-    );
+  _renderSearchResult = async () => {
+    let res = await fetch(api.getSearchBook+this.q);
+    res = await res.json();
+    let result = res['res'];
+    this.setState({ data: this.state.data.cloneWithRows(result)});
+    // return (
+    //   <View style={styles.listWrap}>
+    //     <BookList search={this.q} navigate = {this.props.navigation.navigate}/>
+    //   </View>
+    //   // <Feeds
+    //   //   ref={view => (this.feeds = view)}
+    //   //   navigator={this.props.navigator}
+    //   //   renderItem={this._renderItem}
+    //   //   fetchData={page => search(this.q, page)}
+    //   //   keyExtractor={item => item.Book_num}
+    //   //   getItemLayout={this._getItemLayout}
+    //   // />
+    // );
   };
 
   render() {
@@ -118,7 +123,10 @@ export default class Search extends React.PureComponent {
           </TouchableHighlight>
         </View>
 
-        {this.state.mode === 'show' ? this._renderSearchResult() : null}
+        {this.state.mode === 'show' ?       
+        <View style={styles.listWrap}>
+        <BookList search={this.state.data} navigate = {this.props.navigation.navigate}/>
+      </View> : null}
       </View>
     );
   }

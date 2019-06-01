@@ -35,6 +35,8 @@ import InsertBook from './src/Screen/AdminCenter/InsertBook';
 import InfoCenter from './src/Screen/InfoCenter/index';
 import ForgotPassword from './src/Screen/InfoCenter/ForgotPassword';
 import ChangePsw from './src/Screen/InfoCenter/ChangePsw';
+import Recommand from './src/recommand/Record';
+import BookRating from './src/Screen/BookRating/index';
 String.prototype.replaceAll = function(search, replacement) {
     var target = this;
     return target.replace(new RegExp(search, 'g'), replacement);
@@ -220,5 +222,11 @@ export default Navi = StackNavigator({
     },
     ChangePsw :{
         screen:ChangePsw
+    },
+    Recommand :{
+        screen:Recommand
+    },
+    BookRating :{
+        screen:BookRating
     }
 });

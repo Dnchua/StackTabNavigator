@@ -58,6 +58,10 @@ export default class ForgotPassword extends Component {
           console.log(navigator)
           this.props.navigation.push(route)
       }
+      forgotPassword = () => {
+        ToastAndroid.show('找回密码成功，请前往登陆', ToastAndroid.SHORT);
+        setTimeout(() => {this.props.navigation.goBack();},2000);
+      }
     // componentWillUnmount() {
     //     // 移除监听
     //     if (this.changeLogin) { this.changeLogin.remove(); }
@@ -113,7 +117,11 @@ export default class ForgotPassword extends Component {
                         submitButton: {
                         backgroundColor: '#4398ff',
                         }
-                    }} />           
+                    }} 
+                    onSubmit = {() => {
+                        this.forgotPassword();
+                    }}
+                    />           
                     <GiftedForm.HiddenWidget name='tos' value={tos} />
                 </GiftedForm>    
             // </View>

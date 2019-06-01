@@ -47,7 +47,8 @@ class MineScene extends Component {
 
     this.state = {
       isRefreshing: false,
-      id:''
+      id:'',
+      whoLogin:''
     }
   }
 
@@ -58,8 +59,17 @@ class MineScene extends Component {
             alert(err)
             return;
         }
-        _that.setState({id:result});
+        _that.setState({id:result,whoLogin:'student'});
     });
+    AsyncStorage.getItem("teacherId",function (err,result){
+      if(err){
+          alert(err)
+          return;
+      }
+      if (result != ''){
+              _that.setState({whoLogin:'teacher'});
+      }
+  });
   }
 
   onHeaderRefresh() {
@@ -123,7 +133,7 @@ class MineScene extends Component {
         <Image style={styles.avatar} source={require('../../img/mine/avatar.png')} />
         <View>
           <View style={{ flexDirection: 'row', alignItems: 'center', }}>
-            <Heading2 style={{ color: 'white' }}>{id}</Heading2>
+            <Heading2 style={{ color: 'white' }}>{this.props.id}</Heading2>
             <Image style={{ marginLeft: 4 }} source={require('../../img/mine/beauty_technician_v15.png')} />
           </View>
           <TouchableOpacity onPress={this.gotoInfoCenter}>
@@ -156,9 +166,10 @@ class MineScene extends Component {
                 <TouchableOpacity style={styles.button} activeOpacity={0.5} onPress={this.changePsw}>
                     <Text style={{color: 'white'}}>修改密码</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.button} activeOpacity={0.5} onPress={this.gotoTeacher}>
+                {this.props.whoLogin === 'student' ? null:
+                  <TouchableOpacity style={styles.button} activeOpacity={0.5} onPress={this.gotoTeacher}>
                     <Text style={{color: 'white'}}>管理员功能</Text>
-                </TouchableOpacity>
+                  </TouchableOpacity>}
             </View>
         </ScrollView>
 

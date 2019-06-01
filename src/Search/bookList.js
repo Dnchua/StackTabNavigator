@@ -30,30 +30,29 @@ export default class BookList extends Component {
 
     //渲染完成，请求网络数据
     componentDidMount() {
-        fetch(api.getSearchBook+this.props.search)
-            .then((response) => response.json())
-            .then((response) => {
-                //解析json数据
-                var json = response['res'];
-                console.log(json);
-                //更新状态机
+        // fetch(api.getSearchBook+this.props.search)
+        //     .then((response) => response.json())
+        //     .then((response) => {
+        //         //解析json数据
+        //         var json = response['res'];
+        //         //更新状态机
                 this.setState({
-                    data: this.state.data.cloneWithRows(json),
+                    data: this.state.data.cloneWithRows(this.props.search),
                 });
-            })
-            .catch((error) => {
-                if (error) {
-                    //网络错误处理
-                    console.log('error', error);
-                }
-            })
+        //     })
+        //     .catch((error) => {
+        //         if (error) {
+        //             //网络错误处理
+        //             console.log('error', error);
+        //         }
+        //     })
     }
 
     render() {
         return (
             <View style={styles.container}>
                 <ListView
-                    dataSource={this.state.data}
+                    dataSource={this.props.search}
                     //相当于Android中Adapter的getView 渲染每一个Item
                     renderRow={this.getView}/>
             </View>
@@ -75,7 +74,7 @@ export default class BookList extends Component {
                               >
                 <View style={styles.row}>
                     {/*左边的图片*/}
-                    <Image source={{uri: rowData.imageName}} style={styles.image}/>
+                    <Image source={{uri: rowData.imageName == "" ? api.defaultPic:rowData.imageName}} style={styles.image}/>
                     <View style={styles.left}>
                         {/*右边的View*/}
                         <Text numberOfLines={1} style={{marginTop: 15, color: '#333333'}}>{rowData.Book_name}</Text>

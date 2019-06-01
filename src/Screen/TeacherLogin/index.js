@@ -57,7 +57,7 @@ export default class TeacherLogin extends Component {
     .then((response) => {
       const state = response['state'];
       if(state === 1) {
-        ToastAndroid.show('登陆成功,三秒后跳转到个人界面', ToastAndroid.SHORT);
+        ToastAndroid.show('登陆成功,三秒后跳转到教师界面', ToastAndroid.SHORT);
         AsyncStorage.setItem("teacherId", this.state.id);
         DeviceEventEmitter.emit('teacherLogin',this.state.id);
         setTimeout(() => {this.props.navigation.goBack();},3000);
@@ -75,7 +75,7 @@ export default class TeacherLogin extends Component {
     })
   }
   static navigationOptions = ({ navigation, screenProps }) => ({
-    headerTitle: "登陆/注册",
+    headerTitle: "教师登陆",
     //设置滑动返回的距离
     gestureResponseDistance: { horizontal: 300 },
 

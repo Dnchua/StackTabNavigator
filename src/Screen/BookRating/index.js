@@ -16,57 +16,31 @@ import {
   AsyncStorage,
   DeviceEventEmitter
 } from "react-native";
+import StarRating from '../../widget/StarRating';
 import {api} from '../../data/api';
 var dimensions = require("Dimensions");
+
 //获取屏幕的宽度
 var { width } = dimensions.get("window");
-export default class InsertBook extends Component {
+export default class BookRating extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      bookName: "",
-      author: "",
-      price: "",
-      publish:"",
-      bookCount:""
+      rating: "",
+      id: ""
     };
   }
 
-  getBookname = (bookName) => {
-    this.setState({bookName});
-  }
 
-  getAuthor = (author) => {
-    this.setState({author});
-  }
-
-  getPrice = (price) => {
-    this.setState({price});
-  }
-
-  getPublish = (publish) => {
-    this.setState({publish});
-  }
-
-  getBookCount = (bookCount) => {
-    this.setState({bookCount});
-  }
-
-  insertBook = () => {
-    // ToastAndroid.show('录入书籍数据成功', ToastAndroid.SHORT);
-    // return;
-    const {bookName,author,price,publish,bookCount} = this.state;
-    // if (psw !== repeatPsw) {
-    //     ToastAndroid.show('两次输入的密码不正确', ToastAndroid.SHORT);
-    //     return;
-    // }
-    const url = api.addBook;
+  submit = () => {
+    ToastAndroid.show('评分成功,2秒后返回上一页', ToastAndroid.SHORT);
+    setTimeout(() => {this.props.navigation.goBack();},2000);
+    return;
+    const {id,rating} = this.state;
+    const url=api.login;
     postData = {
-      bookName:bookName,
-      author:author,
-      price:price,
-      publish:publish,
-      bookCount:bookCount
+      id:id,
+      password:psw
     };
     let myHeaders = new Headers();
     myHeaders.append('Content-Type', 'application/json');
@@ -80,12 +54,12 @@ export default class InsertBook extends Component {
     .then((response) => {
       const state = response['state'];
       if(state === 1) {
-        ToastAndroid.show('图书录入数据成功，2秒后返回上一层菜单', ToastAndroid.SHORT);
-        setTimeout(() => {this.props.navigation.goBack();},2000);
+        ToastAndroid.show('评分成功', ToastAndroid.SHORT);
+        setTimeout(() => {this.props.navigation.goBack();},3000);
       }
-      if(state === 3) {
-        ToastAndroid.show('图书录入数据失败，请询问管理员', ToastAndroid.SHORT);
-      }
+      // if(state === 3) {
+      //   ToastAndroid.show('请检查账号密码是否有误', ToastAndroid.SHORT);
+      // }
     })
     .catch((error) => {
         if (error) {
@@ -96,7 +70,7 @@ export default class InsertBook extends Component {
     })
   }
   static navigationOptions = ({ navigation, screenProps }) => ({
-    headerTitle: "图书录入",
+    headerTitle: "图书评分系统",
     //设置滑动返回的距离
     gestureResponseDistance: { horizontal: 300 },
 
@@ -122,49 +96,32 @@ export default class InsertBook extends Component {
     // headerLeft: (<View/>),
   });
 
+  gotoSignup = () => {
+    this.props.navigation.navigate('Signup')
+  }
+
+  gotoForgot = () => {
+    this.props.navigation.navigate('ForgotPassword')
+  }
+  onStarRatingPress(value) {
+    this.setState({
+      rating:value
+    })
+  }
   render() {
     return (
       <View style={styles.container}>
-        <TextInput
-          style={styles.textInput}
-          placeholder={"请输入书籍名称"}
-          //输入框下划线
-          underlineColorAndroid={"transparent"}
-          onChangeText={this.getBookname}
-        />
-        {/*密码*/}
-        <TextInput
-          style={styles.textInput}
-          placeholder={"请输入作者"}
-          underlineColorAndroid={"transparent"}
-          onChangeText={this.getAuthor}
-        />
-        {/*重复密码*/}
-        <TextInput
-          style={styles.textInput}
-          placeholder={"请输入价格"}
-          underlineColorAndroid={"transparent"}
-          onChangeText={this.getPrice}
-        />
-        {/*身份证后六位*/}
-        <TextInput
-          style={styles.textInput}
-          placeholder={"请输入出版社名称"}
-          underlineColorAndroid={"transparent"}
-          onChangeText={this.getPublish}
-        />
-        {/*身份证后六位*/}
-        <TextInput
-          style={styles.textInput}
-          placeholder={"请输入书籍采购总量"}
-          underlineColorAndroid={"transparent"}
-          onChangeText={this.getBookCount}
-        />
-        {/*注册*/}
-        <TouchableOpacity style={styles.btnStyle} onPress={this.insertBook}>
-          <Text style={styles.loginText}>录入图书</Text>
+      <StarRating
+        maxStars={5}
+        rating={3}
+        disabled={false}
+        starSize={15}
+        onStarChange={(value) => this.onStarRatingPress(value)}
+      />
+        {/*登录*/}
+        <TouchableOpacity style={styles.btnStyle} onPress={this.submit}>
+          <Text style={styles.loginText}>提交</Text>
         </TouchableOpacity>
-        {/*无法登录  新用户*/}
       </View>
     );
   }
@@ -174,9 +131,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: "column",
-    justifyContent:'space-around',
     //设置次轴的对齐方式
     alignItems: "center",
+    justifyContent:'center',
     backgroundColor: "#F5FCFF"
   },
   button: {
