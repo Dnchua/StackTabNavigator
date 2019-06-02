@@ -40,6 +40,8 @@
 		A18923744F06469FA35AB280 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 312284B32A12463699B142EA /* libc++.tbd */; };
 		D0C439A340114A89809EE3EA /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 195BC60BBE1641A2B0B9D128 /* libz.tbd */; };
 		B7D15951129A456B9D508D04 /* libRNFS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E3DC249C34F1439989384C09 /* libRNFS.a */; };
+		C26D5CD7888947A594A65B90 /* libRNFetchBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AFC5D8F2F4D43F686D02FA5 /* libRNFetchBlob.a */; };
+		9DC2EBD1C2F04A33BA2C6F2D /* libRCTPdf.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B24179DFDE4346518494A73E /* libRCTPdf.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -273,6 +275,10 @@
 		195BC60BBE1641A2B0B9D128 /* libz.tbd */ = {isa = PBXFileReference; name = "libz.tbd"; path = "usr/lib/libz.tbd"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = sourcecode.text-based-dylib-definition; explicitFileType = undefined; includeInIndex = 0; };
 		EAE7C417955A4DCD932264FF /* RNFS.xcodeproj */ = {isa = PBXFileReference; name = "RNFS.xcodeproj"; path = "../node_modules/react-native-fs/RNFS.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
 		E3DC249C34F1439989384C09 /* libRNFS.a */ = {isa = PBXFileReference; name = "libRNFS.a"; path = "libRNFS.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		93D93E52DB81403AAC3D7E53 /* RNFetchBlob.xcodeproj */ = {isa = PBXFileReference; name = "RNFetchBlob.xcodeproj"; path = "../node_modules/rn-fetch-blob/ios/RNFetchBlob.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		0AFC5D8F2F4D43F686D02FA5 /* libRNFetchBlob.a */ = {isa = PBXFileReference; name = "libRNFetchBlob.a"; path = "libRNFetchBlob.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		EA0662D8D364434A96600C98 /* RCTPdf.xcodeproj */ = {isa = PBXFileReference; name = "RCTPdf.xcodeproj"; path = "../node_modules/react-native-pdf/ios/RCTPdf.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		B24179DFDE4346518494A73E /* libRCTPdf.a */ = {isa = PBXFileReference; name = "libRCTPdf.a"; path = "libRCTPdf.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -305,6 +311,8 @@
 				A18923744F06469FA35AB280 /* libc++.tbd in Frameworks */,
 				D0C439A340114A89809EE3EA /* libz.tbd in Frameworks */,
 				B7D15951129A456B9D508D04 /* libRNFS.a in Frameworks */,
+				C26D5CD7888947A594A65B90 /* libRNFetchBlob.a in Frameworks */,
+				9DC2EBD1C2F04A33BA2C6F2D /* libRCTPdf.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -475,6 +483,8 @@
 				139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */,
 				1B0488AF95E84A0C9260449C /* RealmReact.xcodeproj */,
 				EAE7C417955A4DCD932264FF /* RNFS.xcodeproj */,
+				93D93E52DB81403AAC3D7E53 /* RNFetchBlob.xcodeproj */,
+				EA0662D8D364434A96600C98 /* RCTPdf.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -1033,11 +1043,14 @@
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/StackTabNavigator.app/StackTabNavigator";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)\..\node_modules\realm\src/**",
 					"$(SRCROOT)\..\node_modules\react-native-fs/**",
+					"$(SRCROOT)\..\node_modules\rn-fetch-blob\ios/**",
+					"$(SRCROOT)\..\node_modules\react-native-pdf\ios\RCTPdf/**",
 				);
 			};
 			name = Debug;
@@ -1058,11 +1071,14 @@
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/StackTabNavigator.app/StackTabNavigator";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)\..\node_modules\realm\src/**",
 					"$(SRCROOT)\..\node_modules\react-native-fs/**",
+					"$(SRCROOT)\..\node_modules\rn-fetch-blob\ios/**",
+					"$(SRCROOT)\..\node_modules\react-native-pdf\ios\RCTPdf/**",
 				);
 			};
 			name = Release;
@@ -1086,6 +1102,8 @@
 					"$(inherited)",
 					"$(SRCROOT)\..\node_modules\realm\src/**",
 					"$(SRCROOT)\..\node_modules\react-native-fs/**",
+					"$(SRCROOT)\..\node_modules\rn-fetch-blob\ios/**",
+					"$(SRCROOT)\..\node_modules\react-native-pdf\ios\RCTPdf/**",
 				);
 			};
 			name = Debug;
@@ -1108,6 +1126,8 @@
 					"$(inherited)",
 					"$(SRCROOT)\..\node_modules\realm\src/**",
 					"$(SRCROOT)\..\node_modules\react-native-fs/**",
+					"$(SRCROOT)\..\node_modules\rn-fetch-blob\ios/**",
+					"$(SRCROOT)\..\node_modules\react-native-pdf\ios\RCTPdf/**",
 				);
 			};
 			name = Release;
@@ -1137,11 +1157,14 @@
 				TVOS_DEPLOYMENT_TARGET = 9.2;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)\..\node_modules\realm\src/**",
 					"$(SRCROOT)\..\node_modules\react-native-fs/**",
+					"$(SRCROOT)\..\node_modules\rn-fetch-blob\ios/**",
+					"$(SRCROOT)\..\node_modules\react-native-pdf\ios\RCTPdf/**",
 				);
 			};
 			name = Debug;
@@ -1171,11 +1194,14 @@
 				TVOS_DEPLOYMENT_TARGET = 9.2;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)\..\node_modules\realm\src/**",
 					"$(SRCROOT)\..\node_modules\react-native-fs/**",
+					"$(SRCROOT)\..\node_modules\rn-fetch-blob\ios/**",
+					"$(SRCROOT)\..\node_modules\react-native-pdf\ios\RCTPdf/**",
 				);
 			};
 			name = Release;
@@ -1200,6 +1226,7 @@
 				TVOS_DEPLOYMENT_TARGET = 10.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 			};
 			name = Debug;
@@ -1224,6 +1251,7 @@
 				TVOS_DEPLOYMENT_TARGET = 10.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 			};
 			name = Release;

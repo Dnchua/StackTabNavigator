@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
-    "test": "jest"
+    "test": "jest",
+    "started":"react-native run-android"
   },
   "dependencies": {
     "fast-xml-parser": "^3.12.16",
@@ -14,8 +15,7 @@
     "react-native-fs": "^2.13.3",
     "react-native-gifted-form": "^0.1.1",
     "react-native-navigation": "^2.18.5",
-    "react-native-pdf": "^5.1.0",
-    "react-native-starrating": "^1.0.1",
+    "react-native-pdf": "5.0.0",
     "react-navigation": "^1.0.0-beta.13",
     "realm": "^2.27.0-rc.3",
     "rn-fetch-blob": "^0.10.15"

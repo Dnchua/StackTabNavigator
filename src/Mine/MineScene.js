@@ -97,6 +97,10 @@ class MineScene extends Component {
   }
 
   gotoTeacher = () => {
+    if(this.props.whoLogin === 'student'){
+      ToastAndroid.show('您不是管理员，没有该权限', ToastAndroid.SHORT);
+      return;
+    }
     this.props.navigate('AdminCenter')
   }
 
@@ -104,6 +108,9 @@ class MineScene extends Component {
     this.props.navigate('InfoCenter')
   }
   
+  PDF = () => {
+    this.props.navigate('PDFExample')
+  }
   renderCells() {
     let cells = []
     let dataList = this.getDataList()
@@ -111,7 +118,7 @@ class MineScene extends Component {
       let sublist = dataList[i]
       for (let j = 0; j < sublist.length; j++) {
         let data = sublist[j]
-        let cell = <DetailCell image={data.image} title={data.title} subtitle={data.subtitle} key={data.title} />
+        let cell = <DetailCell image={data.image} title={data.title} subtitle={data.subtitle} key={data.title} press={data.press}/>
         cells.push(cell)
       }
       cells.push(<SpacingView key={i} />)
@@ -159,10 +166,7 @@ class MineScene extends Component {
           {this.renderHeader()}
           <SpacingView />
           {this.renderCells()}
-            <View style={styles.container}>
-                <TouchableOpacity style={styles.button} activeOpacity={0.5} onPress={this.logout}>
-                    <Text style={{color: 'white'}}>退出登陆</Text>
-                </TouchableOpacity>
+            {/* <View style={styles.container}>
                 <TouchableOpacity style={styles.button} activeOpacity={0.5} onPress={this.changePsw}>
                     <Text style={{color: 'white'}}>修改密码</Text>
                 </TouchableOpacity>
@@ -170,7 +174,7 @@ class MineScene extends Component {
                   <TouchableOpacity style={styles.button} activeOpacity={0.5} onPress={this.gotoTeacher}>
                     <Text style={{color: 'white'}}>管理员功能</Text>
                   </TouchableOpacity>}
-            </View>
+            </View> */}
         </ScrollView>
 
       </View>
@@ -181,17 +185,17 @@ class MineScene extends Component {
     return (
       [
         [
-          { title: '我的钱包', image: require('../../img/mine/icon_mine_wallet.png') },
+          { title: '修改密码', image: require('../../img/mine/icon_mine_wallet.png') ,press:this.changePsw},
           { title: '我的借阅', image: require('../../img/mine/icon_mine_balance.png') },
         ],
         [
-          { title: '好友都在看什么', image: require('../../img/mine/icon_mine_friends.png') },
+          { title: '管理员功能', image: require('../../img/mine/icon_mine_friends.png') ,press:this.gotoTeacher},
           { title: '我的评价', image: require('../../img/mine/icon_mine_comment.png') },
           { title: '我的收藏', image: require('../../img/mine/icon_mine_collection.png') },
         ],
         [
-          { title: '客服中心', image: require('../../img/mine/icon_mine_customerService.png') },
-          { title: '关于我们', subtitle: '我要合作', image: require('../../img/mine/icon_mine_aboutmeituan.png') }
+          { title: '阅读器', image: require('../../img/mine/icon_mine_customerService.png') ,press:this.PDF},
+          { title: '退出登陆', image: require('../../img/mine/icon_mine_aboutmeituan.png'),press:this.logout }
         ]
       ]
     )

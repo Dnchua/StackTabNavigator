@@ -26,7 +26,7 @@ class DetailCell extends PureComponent<Props> {
 
     return (
       <View style={styles.container}>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={this.props.press}>
           <View style={[styles.content, this.props.style]}>
             {icon}
             <Heading3>{this.props.title}</Heading3>

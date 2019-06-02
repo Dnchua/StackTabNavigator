@@ -15,6 +15,10 @@ export default class BookDetails extends Component {
     gotoStarRating = () => {
         this.props.navigation.navigate('BookRating');
     }
+    gotoRead = () => {
+        const Data = this.props.navigation.state.params.rowData;
+        this.props.navigation.navigate('PDFExample',{id:Data.Book_name})
+    }
     render() {
         const rowData = this.props.navigation.state.params.rowData;
         return (
@@ -37,6 +41,9 @@ export default class BookDetails extends Component {
                 <View style={styles.bookRank}>
                     <TouchableOpacity onPress={this.gotoStarRating}>
                         <Text>书评</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={this.gotoRead}>
+                        <Text>在线阅读</Text>
                     </TouchableOpacity>
                 </View>
                 <Text style={{marginTop: 15, marginBottom: 15,color: '#333333'}}>馆藏信息 ({rowData.Current_num}/{rowData.Total_num})</Text>
@@ -68,7 +75,7 @@ const styles = StyleSheet.create({
         height:25,
         marginTop: 30,
         flexDirection: 'row',
-        justifyContent: 'flex-start',
+        justifyContent: 'space-around',
         backgroundColor: 'white'
     },
     item: {

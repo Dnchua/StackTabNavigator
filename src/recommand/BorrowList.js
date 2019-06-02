@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
   ToastAndroid
 } from "react-native";
-
+import {api} from '../data/api';
 var dimensions = require("Dimensions");
 //获取屏幕的宽度
 var { width } = dimensions.get("window");
@@ -61,27 +61,31 @@ export default class BorrowList extends Component {
 
   //渲染完成，请求网络数据
   componentDidMount() {
-      var json  = recommandList.res;
+    if(this.props.userId === ""){
+          let json  = recommandList.res;
     this.setState({
       data: this.state.data.cloneWithRows(json)
     });
-    // const url = this.props.url + this.props.userId;
-    // fetch(url)
-    //     .then((response) => response.json())
-    //     .then((response) => {
-    //         //解析json数据
-    //         var json = response['res'];
-    //         //更新状态机
-    //         this.setState({
-    //             data: this.state.data.cloneWithRows(json),
-    //         });
-    //     })
-    //     .catch((error) => {
-    //         if (error) {
-    //             //网络错误处理
-    //             console.log('error', error);
-    //         }
-    //     })
+    return;
+    }
+
+    const url = api.getRecommendBook + this.props.userId;
+    fetch(url)
+        .then((response) => response.json())
+        .then((response) => {
+            //解析json数据
+            var json = response['res'];
+            //更新状态机
+            this.setState({
+                data: this.state.data.cloneWithRows(json),
+            });
+        })
+        .catch((error) => {
+            if (error) {
+                //网络错误处理
+                console.log('error', error);
+            }
+        })
   }
 
   render() {
@@ -101,10 +105,15 @@ export default class BorrowList extends Component {
    * @param rowData
    * @returns {XML}
    */
-  getView(rowData) {
+  getView = (rowData) => {
     //这里返回的就是每个Item
+    if (rowData.imageName =='') {
+      rowData.imageName = api.defaultPic;
+    }
     return (
-      <TouchableOpacity activeOpacity={0.5}>
+      <TouchableOpacity activeOpacity={0.5}             onPress = { () => {
+        this.props.navigate('BookDetails',{rowData:rowData});
+    }}>
         <View style={styles.item}>
           {/*左边的图片*/}
           <Image source={{ uri: rowData.imageName }} style={styles.image} />

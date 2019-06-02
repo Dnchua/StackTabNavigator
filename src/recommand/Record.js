@@ -81,8 +81,8 @@ export default class Recommand extends Component {
     const { isLogin, id } = this.state;
     return (
       <View style={styles.container}>
-        {true ? (
-          <BorrowList userId={id} />
+        {isLogin ? (
+          <BorrowList userId={id} navigate={this.props.navigation.navigate}/>
         ) : (
             <View style={styles.containerB}>
               <Text style={{ color: "black" }}>该功能请登陆后使用</Text>
