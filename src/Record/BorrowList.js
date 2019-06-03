@@ -16,7 +16,7 @@ import { px2dp, SCREEN_WIDTH } from '../utils';
 export default class BorrowList extends Component {
 
     static defaultProps = {
-        url: 'http://47.106.245.58:15515/getBorrowBook?id='
+        url: 'http://192.168.31.178:15515/getBorrowBook?id='
     };
 
     constructor(props) {
@@ -64,11 +64,13 @@ export default class BorrowList extends Component {
      * @param rowData
      * @returns {XML}
      */
-    getView(rowData) {
+    getView= (rowData) => {
         //这里返回的就是每个Item
         return (
             <TouchableOpacity activeOpacity={0.5}
-                              >
+                                onPress = { () => {
+                this.props.navigate('BookDetails',{rowData:rowData});
+            }}          >
                 <View style={styles.item}>
                     {/*左边的图片*/}
                     <Image source={{uri: rowData.imageName}} style={styles.image}/>

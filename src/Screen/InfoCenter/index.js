@@ -15,13 +15,13 @@ export default class InfoCenter extends Component {
         super(props);
         this.state = {
             form: {
-              fullName: '为四四',
+              fullName: '',
               tos: false,
-              academy:'电子信息工程',
-              class_id:'51班',
-              sex:'男',
-              telephone:'18801000100',
-              email:'111@163.com',
+              academy:'',
+              class_id:'',
+              sex:'',
+              telephone:'',
+              email:'',
             },
             sid:''
         }
@@ -37,10 +37,58 @@ export default class InfoCenter extends Component {
                  _that.setState({isLogin:true,sid:result});   
                 }
         });
+        this.getStudentInfo();
         this.changeLogin = DeviceEventEmitter.addListener('logout',this.logout);
         this.loginSucess = DeviceEventEmitter.addListener('login',this.login);
     }
 
+    getStudentInfo = async () => {
+        const ssid = this.props.navigation.getParam("id");
+        const {form,sid} = this.state;
+        const url = api.getStudentInfo+ssid;
+        let res = await fetch(url);
+        res = await res.json();
+        let result = await res['res'][0];
+                    this.setState({
+                form: {
+                    fullName: result.Student_name,
+                    academy:result.Academy_id,
+                    class_id:result.Class_id,
+                    sex:result.Sex,
+                    telephone:result.Telephone,
+                    email:result.Email,
+                  }
+            })
+        // .then((response) => response.json())
+        // .then((response) => {
+        //   const state = response['state'];
+        //   const res = response['res'];
+        //   console.warn(res);
+        //   if(state === 1) {
+        //     this.setState({
+        //         form: {
+        //             fullName: res.Student_name,
+        //             academy:res.Academy_id,
+        //             class_id:res.Class_id,
+        //             sex:res.Sex,
+        //             telephone:res.Telephone,
+        //             email:res.Email,
+        //           }
+        //     })
+        //   }
+        //   if(state === 3) {
+        //     ToastAndroid.show('获取个人数据失败，请询问管理员', ToastAndroid.SHORT);
+        //   }
+        // })
+        // .catch((error) => {
+        //     if (error) {
+        //         //网络错误处理
+        //         console.log('error', error);
+        //         ToastAndroid.show('网络错误', ToastAndroid.SHORT);
+        //     }
+        // })
+
+    }
     logout = (mes) => {
         this.setState({
             isLogin:false

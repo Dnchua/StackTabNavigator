@@ -56,7 +56,7 @@ export default class Record extends Component {
     return (
       <View style={styles.container}>
         {isLogin ? (
-          <BorrowList userId={id} />
+          <BorrowList userId={id} navigate = {this.props.navigation.navigate}/>
         ) : (
             <View style={styles.containerB}>
               <Text style={{ color: "black" }}>该功能请登陆后使用</Text>

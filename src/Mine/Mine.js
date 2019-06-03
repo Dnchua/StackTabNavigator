@@ -20,15 +20,15 @@ export default class Mine extends Component {
     }
     componentDidMount () {
         let _that=this;
-        // AsyncStorage.getItem("id",function (err,result){
-        //     if(err){
-        //         alert(err)
-        //         return;
-        //     }
-        //         if(result !== null){
-        //          _that.setState({isLogin:true,sid:result});   
-        //         }
-        // });
+        AsyncStorage.getItem("id",function (err,result){
+            if(err){
+                alert(err)
+                return;
+            }
+                if(result !== null){
+                 _that.setState({isLogin:true,id:result});   
+                }
+        });
         this.changeLogin = DeviceEventEmitter.addListener('logout',this.logout);
         this.loginSucess = DeviceEventEmitter.addListener('login',this.login);
         this.TloginSucess = DeviceEventEmitter.addListener('teacherLogin',this.tLogin);

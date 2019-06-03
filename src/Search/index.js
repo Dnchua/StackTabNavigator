@@ -88,6 +88,7 @@ export default class Search extends React.PureComponent {
     let res = await fetch(api.getSearchBook+this.q);
     res = await res.json();
     let result = res['res'];
+    console.warn(result);
     this.setState({ data: this.state.data.cloneWithRows(result)});
     // return (
     //   <View style={styles.listWrap}>

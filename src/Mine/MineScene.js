@@ -105,7 +105,7 @@ class MineScene extends Component {
   }
 
   gotoInfoCenter = () => {
-    this.props.navigate('InfoCenter')
+    this.props.navigate('InfoCenter',{id:this.state.id})
   }
   
   PDF = () => {
